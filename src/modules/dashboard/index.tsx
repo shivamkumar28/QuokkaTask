@@ -19,6 +19,7 @@ import { captureRef } from 'react-native-view-shot';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { styles } from './styles';
 import { Loader } from '../../components';
+import { images } from '../../constant';
 
 const effects = [
   { id: 'original', label: 'Original' },
@@ -27,16 +28,13 @@ const effects = [
   { id: 'invert', label: 'Invert' },
   { id: 'brightness', label: 'Bright' },
 ];
-const Image_Url =
-  'https://wallpapers.com/images/hd/black-haired-goku-ultra-instinct-yesw73gq4teqt0rd.webp';
-
 const Dashboard = () => {
   const [selectedEffect, setSelectedEffect] = useState('original');
   const [loading, setLoading] = useState(false);
   const viewRef = useRef(null);
 
   const requestStoragePermission = async () => {
-    if (Platform.OS === 'android') {
+    if (Platform.OS === 'android' && Platform.Version < 29) {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       );
@@ -67,13 +65,7 @@ const Dashboard = () => {
 
   const renderImage = () => {
     const img = (
-      <Image
-        source={{
-          uri: Image_Url,
-        }}
-        style={styles.image}
-        resizeMode="cover"
-      />
+      <Image source={images.gokuImg} style={styles.image} resizeMode="cover" />
     );
 
     switch (selectedEffect) {

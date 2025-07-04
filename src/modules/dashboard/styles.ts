@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     height: 300,
     overflow: 'hidden',
     borderRadius: 12,
+    backgroundColor: 'lightgrey',
   },
   image: {
     width: '100%',
